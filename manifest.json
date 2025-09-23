@@ -1,0 +1,15 @@
+{
+  "name": "LeetCode Hint",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [{
+    "matches": ["https://leetcode.com/*"],
+    "js": ["content.js"],
+    "css": ["style.css"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": [{
+    "resources": ["style.css"],
+    "matches": ["https://leetcode.com/*"]
+  }]
+}

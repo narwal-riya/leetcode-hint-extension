@@ -1,0 +1,48 @@
+/* Style for the hint button */
+#leet-hint-btn {
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: Arial, sans-serif;
+    border: none;
+  }
+  
+  /* Style for the hint container */
+  #leet-hint-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 9998;
+    padding: 15px;
+    display: none; /* Hidden by default */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style for the hint content */
+  .hint-content h3 {
+    color: #ffa116;
+    margin-top: 0;
+    font-size: 18px;
+  }
+  
+  .hint-content p {
+    line-height: 1.5;
+  }
+  
+  /* Style for the close button */
+  #close-hint {
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  #close-hint:hover {
+    background: #e0e0e0;
+  }
