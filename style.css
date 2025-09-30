@@ -1,48 +1,52 @@
-/* Style for the hint button */
-#leet-hint-btn {
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-family: Arial, sans-serif;
-    border: none;
+(function() {
+  function addElements() {
+    // Prevent duplicate button
+    if (document.getElementById("leet-hint-btn")) return;
+
+    // Check if we are inside a problem page (LeetCode marks problems with "question-title")
+    const problemTitle = document.querySelector('[data-cy="question-title"]');
+    if (!problemTitle) return; // not a problem page, exit
+
+    // Create button
+    const button = document.createElement("button");
+    button.id = "leet-hint-btn";
+    button.innerText = "💡 Show Hint";
+    button.style.position = "fixed";
+    button.style.bottom = "20px";
+    button.style.right = "20px";
+    button.style.zIndex = "9999";
+
+    // Create hint container
+    const container = document.createElement("div");
+    container.id = "leet-hint-container";
+    container.innerHTML = `
+      <div class="hint-content">
+        <h3>Hint</h3>
+        <p>Think about the core data structure or pattern here.</p>
+        <button id="close-hint">Close</button>
+      </div>
+    `;
+    document.body.appendChild(container);
+    document.body.appendChild(button);
+
+    // Show/Hide logic
+    button.addEventListener("click", () => {
+      container.style.display = container.style.display === "none" ? "block" : "none";
+    });
+
+    container.querySelector("#close-hint").addEventListener("click", () => {
+      container.style.display = "none";
+    });
   }
-  
-  /* Style for the hint container */
-  #leet-hint-container {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    z-index: 9998;
-    padding: 15px;
-    display: none; /* Hidden by default */
-    font-family: Arial, sans-serif;
+
+  // Wait for page load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", addElements);
+  } else {
+    addElements();
   }
-  
-  /* Style for the hint content */
-  .hint-content h3 {
-    color: #ffa116;
-    margin-top: 0;
-    font-size: 18px;
-  }
-  
-  .hint-content p {
-    line-height: 1.5;
-  }
-  
-  /* Style for the close button */
-  #close-hint {
-    background: #f0f0f0;
-    border: none;
-    padding: 8px 15px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  #close-hint:hover {
-    background: #e0e0e0;
-  }
+
+  // Handle dynamic navigation on LeetCode (SPA)
+  const observer = new MutationObserver(() => addElements());
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
